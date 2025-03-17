@@ -1,5 +1,3 @@
-print("Thank You For Choosing The Kryuss Rejoin Tool. Your Support Means Everything To Us!:)
-
 local zfRgYrWvJb = game:GetService("GuiService")
 local zxNsAtKfUq = game:GetService("Players")
 local eVgHiTyZRp = zxNsAtKfUq.LocalPlayer
