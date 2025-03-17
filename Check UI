@@ -1,0 +1,40 @@
+print("Thank You For Choosing The Kryuss Rejoin Tool. Your Support Means Everything To Us!:)
+
+local zfRgYrWvJb = game:GetService("GuiService")
+local zxNsAtKfUq = game:GetService("Players")
+local eVgHiTyZRp = zxNsAtKfUq.LocalPlayer
+
+local jdKnWfVsQs = false
+
+if not game:IsLoaded() then
+    game.Loaded:Wait()
+end
+
+zfRgYrWvJb.ErrorMessageChanged:Connect(function()
+    local gcFyJbZiVk = zfRgYrWvJb:GetErrorMessage()
+    if gcFyJbZiVk and string.find(gcFyJbZiVk:lower(), "disconnected") then
+        jdKnWfVsQs = true
+    end
+end)
+
+local function cdFqGpVsUz(status)
+    if eVgHiTyZRp and eVgHiTyZRp.Parent then
+        pcall(function()
+            writefile("executor_check_" .. eVgHiTyZRp.Name .. ".txt", status .. ":" .. os.time())
+        end)
+    end
+end
+
+cdFqGpVsUz("working")
+
+local ilTxUsWbDv = "working"
+while true do
+    task.wait(1) 
+
+    if not jdKnWfVsQs and eVgHiTyZRp and eVgHiTyZRp.Parent and eVgHiTyZRp:FindFirstChildWhichIsA("PlayerScripts") then
+        if ilTxUsWbDv ~= "working" then
+            cdFqGpVsUz("working")
+            ilTxUsWbDv = "working"
+        end
+    end
+end
