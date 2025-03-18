@@ -1,38 +1,43 @@
-local zfRgYrWvJb = game:GetService("GuiService")
-local zxNsAtKfUq = game:GetService("Players")
-local eVgHiTyZRp = zxNsAtKfUq.LocalPlayer
+local AqhKfmBtPzx = game:GetService("GuiService")
+local QrnVysJlCwd = game:GetService("Players")
 
-local jdKnWfVsQs = false
+getgenv().WxvHdsNmKyu = false
 
 if not game:IsLoaded() then
     game.Loaded:Wait()
 end
 
-zfRgYrWvJb.ErrorMessageChanged:Connect(function()
-    local gcFyJbZiVk = zfRgYrWvJb:GetErrorMessage()
-    if gcFyJbZiVk and string.find(gcFyJbZiVk:lower(), "disconnected") then
-        jdKnWfVsQs = true
+AqhKfmBtPzx.ErrorMessageChanged:Connect(function()
+    local BhjLzpXqYwv, CndFtoMvKsr = pcall(function()
+        return AqhKfmBtPzx:GetErrorCode()
+    end)
+
+    if BhjLzpXqYwv and CndFtoMvKsr then
+        local YkgJrqDkPvo = tostring(CndFtoMvKsr):lower()
+        if YkgJrqDkPvo:find("lost connection") or YkgJrqDkPvo:find("disconnected") then
+            getgenv().WxvHdsNmKyu = true
+        end
     end
 end)
 
-local function cdFqGpVsUz(status)
-    if eVgHiTyZRp and eVgHiTyZRp.Parent then
+local function FkmNybGqJhv(MvpZtlKxDso)
+    if writefile then
+        local XrhPjoLqWvz = "Unknown"
+        if QrnVysJlCwd.LocalPlayer then
+            XrhPjoLqWvz = QrnVysJlCwd.LocalPlayer.Name
+        end
+        local TvgDsmNfKuy = "FS-Kryuss_" .. XrhPjoLqWvz .. ".txt"
         pcall(function()
-            writefile("executor_check_" .. eVgHiTyZRp.Name .. ".txt", status .. ":" .. os.time())
+            writefile(TvgDsmNfKuy, MvpZtlKxDso .. ":" .. tostring(os.time()))
         end)
     end
 end
 
-cdFqGpVsUz("working")
+FkmNybGqJhv("working")
 
-local ilTxUsWbDv = "working"
-while true do
-    task.wait(1) 
-
-    if not jdKnWfVsQs and eVgHiTyZRp and eVgHiTyZRp.Parent and eVgHiTyZRp:FindFirstChildWhichIsA("PlayerScripts") then
-        if ilTxUsWbDv ~= "working" then
-            cdFqGpVsUz("working")
-            ilTxUsWbDv = "working"
-        end
-    end
+while not getgenv().WxvHdsNmKyu do
+    FkmNybGqJhv("working")
+    task.wait(1)
 end
+
+FkmNybGqJhv("disconnected")
